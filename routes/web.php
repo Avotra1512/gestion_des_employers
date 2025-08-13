@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\SalaireController;
 use App\Http\Requests\AuthRequest;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Mail\testMail;
@@ -15,8 +17,8 @@ use App\Http\Controllers\SettingController;
 
 
 
-Route::get('/', [AuthController::class, 'login'])->name('login'); 
-Route::post('/', [AuthController::class, 'handleLogin'])->name('handleLogin'); 
+Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::post('/', [AuthController::class, 'handleLogin'])->name('handleLogin');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/validate-account/{email}', [AdminController::class, 'defineAccess']);
@@ -45,7 +47,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/dashboard', [AppController::class, 'index'])->name('dashboard');
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
-    
+
 
     Route::prefix('departements')->group(function(){
         Route::get('/', [DepartementController::class, 'index'])->name('departement.index');
@@ -65,7 +67,7 @@ Route::middleware('auth')->group(function(){
         Route::get('/', [EmployerController::class, 'index'])->name('employer.index');
         Route::get('/create', [EmployerController::class, 'create'])->name('employer.create');
         Route::get('/edit/{employer}', [EmployerController::class, 'edit'])->name('employer.edit');
-    
+
         //Route d'actions
         Route::post('/store', [EmployerController::class, 'store'])->name('employer.store');
         Route::put('/update/{employer}', [EmployerController::class, 'update'])->name('employer.update');
@@ -75,30 +77,50 @@ Route::middleware('auth')->group(function(){
 
     });
 
-    
+
+Route::prefix('paiements')->group(function () {
+    Route::get('/', [SalaireController::class, 'index'])->name('paiements.index');
+    Route::get('/create', [SalaireController::class, 'create'])->name('paiements.create');
+    Route::get('/edit/{id}', [SalaireController::class, 'edit'])->name('paiements.edit');
+
+    // Actions
+    Route::post('/store', [SalaireController::class, 'store'])->name('paiements.store');
+    Route::put('/update/{id}', [SalaireController::class, 'update'])->name('paiements.update');
+    Route::get('/delete/{id}', [SalaireController::class, 'destroy'])->name('paiements.destroy');
+    Route::get('/paiements/paiement/search', [SalaireController::class, 'search'])->name('paiements.search');
+});
+
+// Génération PDF
+Route::get('/paiements/{id}/print', [SalaireController::class, 'print'])->name('paiements.print');
+Route::get('/paiements/search/date', [SalaireController::class, 'searchByDate'])->name('paiements.searchByDate');
+
+
+
 
     Route::prefix('administrateurs')->group(function(){
         Route::get('/', [AdminController::class, 'index'])->name('administrateurs');
         Route::get('/create', [AdminController::class, 'create'])->name('administrateurs.create');
         Route::post('/store', [AdminController::class, 'store'])->name('administrateurs.store');
         Route::get('/delete/{user}', [AdminController::class, 'delete'])->name('administrateurs.delete');
-        
-        
+
+
         // Route de recherche (si vous avez une autre route de recherche dédiée)
         Route::get('/search', [AdminController::class, 'search'])->name('administrateurs.search'); // Recherche
 
 
 
-        
+
 
     });
 
-    
+
 
     Route::get('/send-test-email', function (){
         Mail::to('test@example.com')->send(new testMail()) ;
-        return 'Email envoyé avec succes verifier votre Mailtrap'; 
+        return 'Email envoyé avec succes verifier votre Mailtrap';
     });
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 });
 

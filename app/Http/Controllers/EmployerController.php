@@ -2,7 +2,7 @@
 
 //Fichier: EmployerController.php
 //Crée par Avotra
-//Date de création : 
+//Date de création :
 //Derniere modification: 27/11/2024
 //Recommandation : Action (insertion, modification et suppression des employers) dans la base
 //Prise de notes : Ajuster le dashboard
@@ -12,13 +12,15 @@ namespace App\Http\Controllers;
 use App\Employer;
 use App\Departement;
 use Illuminate\Http\Request;
+use Exception;
 use App\Http\Requests\StoreEmployeRequest;
 use App\Http\Requests\UpdateEmployerRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Imports\EmployersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 
@@ -36,7 +38,7 @@ class EmployerController extends Controller
         return view('employers.create', compact('departements'));
     }
 
-    
+
     public function edit(Employer $employer){
         $departements = Departement::all();
         return view('employers.edit', compact('employer', 'departements'));
@@ -79,8 +81,8 @@ class EmployerController extends Controller
         return redirect()->route('employer.index')->with('success_message', 'Employé ajouté avec succès.');
     }
 
-    
- 
+
+
 
 
     public function update(Request $request, Employer $employer)
@@ -125,7 +127,7 @@ class EmployerController extends Controller
         return redirect()->route('employer.index', $employer->id)->with('success_message', 'Les informations de l\'employé ont été mises à jour avec succès.');
     }
 
-    
+
     public function delete(Employer $employer)
     {
         //Enregistrer un nouveau département
@@ -137,7 +139,7 @@ class EmployerController extends Controller
         } catch (Exception $e) {
             dd($e);
         }
-       
+
     }
 
     public function search(Request $request)

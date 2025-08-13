@@ -35,7 +35,7 @@
 								    </div>
 
 									<div class="mb-3">
-									    <label for="setting-input-2" class="form-label">IM</label>
+									    <label for="setting-input-2" class="form-label">Matricule</label>
 									    <input type="number" class="form-control" id="setting-input-2" name="montant_journalier" value="{{ old('montant_journalier') }}" required>
 									@error('montant_journalier')
 									<div class="text-danger">{{ $message }}</div>

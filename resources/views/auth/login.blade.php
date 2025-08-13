@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+
     <title>Gestion Employers</title>
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
 
     <!-- FontAwesome JS-->
     <script defer src="{{asset('assets/plugins/fontawesome/js/all.min.js')}}"></script>
-      
+
 
 
     <style media="screen">
@@ -21,7 +21,7 @@ body{
     background-repeat: no-repeat; /* Empêcher la répétition de l'image */
 }
 .wrapper{
-    
+
 }
 form{
     height: 270px;
@@ -34,7 +34,7 @@ form{
     padding: 50px 35px;
     margin-left: 35%;
     margin-top: 70px;
-    
+
 }
 form h3{
     font-size: 25px;
@@ -61,7 +61,7 @@ form .input-box{
     font-size: 16px;
     color: none;
     padding: 20px 45px 20px 20px;
-    
+
 }
 .input-box input::placeholder{
     color: #222;
@@ -96,21 +96,21 @@ button{
     cursor: pointer;
     font-weight: 600;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
-    
+
 }
 
-    </style> 
+    </style>
 </head>
 <body>
-    
+
     <form method="post" action ="{{route('handleLogin')}}">
 
-        @csrf 
+        @csrf
         @method('POST')
 
     <div class="wrapper">
         <h3>Espace de Connexion</h3>
-        
+
 
         <div class="input-box">
         @if (Session::get('success_message'))
@@ -120,7 +120,7 @@ button{
             <center><b style="font-size:15px; color:rgb(185, 81, 81);">{{ Session::get('error_msg') }}</b></center>
         @endif
 
-        <!--{{ Hash::make('azerty') }}-->
+    <!--{{ Hash::make('azerty') }}-->
             <input  type="email" name="email" class="email" placeholder="Email" required>
             <span class="icon"><i class='fa fa-user'></i></span>
 
@@ -128,12 +128,12 @@ button{
             <span class="ycon"><i class='fa fa-lock'></i></span>
         </div>
         <button type="submit" class="">Connexion</button>
-    </div>    
+    </div>
     </form>
 
-    <!-- Javascript -->          
+    <!-- Javascript -->
     <script src="{{asset('assets/plugins/popper.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>  
-    
+    <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+
 </body>
 </html>

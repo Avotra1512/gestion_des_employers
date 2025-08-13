@@ -33,6 +33,8 @@
 		    <div class="container-xl">
 
 			@yield('content')
+            @yield('scripts')
+
 
             
 			    

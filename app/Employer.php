@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Departement;
+use App\Salaire;
 use Illuminate\Database\Eloquent\Model;
 
 class Employer extends Model
@@ -19,4 +20,9 @@ class Employer extends Model
     {
     return $this->photos ? asset('storage/' . $this->photos) : null;
     }
+
+    public function salaires()
+{
+    return $this->hasMany(Salaire::class);
+}
 }

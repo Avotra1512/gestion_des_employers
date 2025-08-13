@@ -20,7 +20,8 @@
 									    <label for="setting-input-1" class="form-label">Nom du service</label>
                                         
   
-									    <textarea type="text" class="form-control" id="setting-input-1" name="apropos" value="{{ $departement->apropos }}" required></textarea>
+									    <textarea class="form-control" id="setting-input-1" name="apropos" required>{{ $departement->apropos }}</textarea>
+
 									@error('apropos')
 									<div class="text-danger">{{ $message }}</div>
 										

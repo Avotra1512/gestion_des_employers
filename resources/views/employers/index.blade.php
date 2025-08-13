@@ -22,10 +22,10 @@
     </div>
 </form>
 
-					                
+
 							    </div><!--//col-->
-							    
-							    <div class="col-auto">						    
+
+							    <div class="col-auto">
 								    <a class="btn app-btn-secondary" href="{{ route('employer.create') }}">
 									    <i class="fa-solid fa-plus"></i>
 									    Ajouter Employer
@@ -34,22 +34,22 @@
                                 <div class="col-auto">
         <a href="{{ route('export.employers') }}" class="btn btn-secondary"><i class="fa fa-download"></i></a>
     </div>
-   
-    
+
+
 						    </div><!--//row-->
-                            
+
 					    </div><!--//table-utilities-->
-                        
+
 				    </div><!--//col-auto-->
 
-                    <div class="col-auto">
+                <!--//    <div class="col-auto">
     <form action="{{ route('import.employers') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <!-- Bouton de soumission du formulaire -->
+         Bouton de soumission du formulaire
         <input type="file" name="file" required>
         <button type="submit" class="btn btn-secondary"><i class="fa fa-upload"></i></button>
     </form>
-</div>
+</div>-->
 
 			    </div><!--//row-->
                 @if(session('success'))
@@ -63,12 +63,12 @@
         {{ session('error') }}
     </div>
 @endif
-     
+
 				@if (Session::get('success_message'))
-				    <div class="alert alert-success">{{ Session::get('success_message') }}</div>	
+				    <div class="alert alert-success">{{ Session::get('success_message') }}</div>
 				@endif
-			   
-				
+
+
 				<div class="search-result">
     @if(isset($searchTerm) && $searchTerm != '')
 	    <div class="alert alert-info">
@@ -83,13 +83,13 @@
                         <table class="table app-table-hover mb-0 text-left">
                             <thead>
                                 <tr>
-                                   
+
                                     <th class="cell">#</th>
-                                    <th class="cell">IM</th>
+                                    <th class="cell">Matricule</th>
                                     <th class="cell">Nom</th>
                                     <th class="cell">Prenom</th>
                                     <!--<th class="cell">Date de naissance</th>-->
-                                    
+
                                     <th class="cell">Email</th>
                                     <th class="cell">Contact</th>
                                     <th class="cell">Sérvices</th>
@@ -100,14 +100,14 @@
                             </thead>
                             <tbody>
                                 @forelse ($employers as $employer)
-                                    <tr> 
-                                      
+                                    <tr>
+
                                         <td class="cell">{{ $employer->id}}</td>
                                         <td class="cell">{{ $employer->montant_journalier }}</td>
                                         <td class="cell">{{ $employer->nom }}</td>
                                         <td class="cell">{{ $employer->prenom }}</td>
                                         <!--<td class="cell">{{ $employer->date_naissance }}</td>-->
-                                        
+
                                         <td class="cell">{{ $employer->email }}</td>
                                         <td class="cell">{{ $employer->contact }}</td>
                                         <td class="cell">{{ $employer->departement->name }}</td>
@@ -126,14 +126,14 @@
                                         <td><a href="{{ route('employer.print', $employer->id) }}" class="btn-sm app-btn-secondary">Imprimer</a></td>
                                     </tr>
                                 @empty
-                                    <tr> 
+                                    <tr>
                                         <td class="cell" colspan="9">Aucun employer ajoutés</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-                </div>      
+                </div>
             </div>
             <nav class="app-pagination">
                 {{ $employers->links() }}
